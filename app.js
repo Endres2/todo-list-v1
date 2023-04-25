@@ -1,6 +1,6 @@
 const express = require("express")
 const bodyParser = require("body-parser");
-const { render } = require("ejs");
+const date = require(__dirname+"/date.js")
 
 
 const app = express()
@@ -15,16 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", 'ejs');
 
 app.get("/", (req, res) => {
-    var today = new Date();
-    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-    var day = weekday[today.getDay()];
-
-    var options = {
-        weekday: "long",
-        day: "numeric",
-        month: "long"
-    }
-    var day = today.toLocaleDateString("en-US",options)
+    let day = date.getDate()
 
     // if(currentDay === 6 || currentDay === 0){
     //     day = "Weekend";
